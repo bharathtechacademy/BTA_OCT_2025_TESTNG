@@ -1,5 +1,7 @@
 package com.creatio.crm.application.elements;
 
-public class SignUpPageElements {
+import com.creatio.crm.framework.web.commons.WebCommons;
+
+public class SignUpPageElements extends WebCommons{
 
 }

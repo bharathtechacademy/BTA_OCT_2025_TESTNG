@@ -29,20 +29,7 @@ public class Reports {
 	// Method to end the printing process
 	public static void endReport() {
 		extent.flush();
-	}
-	
-	// Method to print the messages
-	public static void logMessage(String status, String message) {
-		if(status.equalsIgnoreCase("pass")) {
-			logger.pass(message);
-		} else if(status.equalsIgnoreCase("fail")) {
-			logger.fail(message);
-		} else if(status.equalsIgnoreCase("info")) {
-			logger.info(message);
-		} else if(status.equalsIgnoreCase("warning")) {
-			logger.warning(message);
-		}
-	}
+	}	
 	
 	// Method to Attach screenshot within the report.
 	public static void attachScreenshot(String screenshotPath) {

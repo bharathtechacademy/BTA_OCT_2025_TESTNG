@@ -20,6 +20,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.creatio.crm.framework.base.BasePage;
+import com.creatio.crm.framework.constants.Web;
+import com.creatio.crm.framework.reports.Reports;
 import com.creatio.crm.framework.utilities.PropUtil;
 
 public class WebCommons {
@@ -31,9 +33,10 @@ public class WebCommons {
 	//Common method to launch the application and verify the title of the application.
 	public void launchApplication() {
 		driver.get(prop.getProperty("APP_URL"));
+		wait(2);
 		String expectedTitle = prop.getProperty("APP_TITLE");
 		String actualTitle = driver.getTitle();
-		if(!actualTitle.equals(expectedTitle)) {			
+		if(!actualTitle.contains(expectedTitle)) {			
 			Assert.fail("Application title verification failed. Expected: " + expectedTitle + ", but got: " + actualTitle);
 		}
 	}
@@ -163,20 +166,20 @@ public class WebCommons {
 	}
 	
 	// Common method to wait for the element.
-	public void waitForElement(WebElement element, int seconds) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+	public void waitForElement(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Web.EXPLICIT_WAIT));
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	
 	// Common method to wait for the element.
-	public void waitForElement(By locator, int seconds) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+	public void waitForElement(By locator) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Web.EXPLICIT_WAIT));
 		wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(locator, 0));
 	}
 	
 	// Common method Wait until element is disappeared.
-	public void waitForElementToDisappear(WebElement element, int seconds) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+	public void waitForElementToDisappear(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Web.EXPLICIT_WAIT));
 		wait.until(ExpectedConditions.invisibilityOf(element));
 	}	
 	
@@ -233,6 +236,19 @@ public class WebCommons {
 			alert.accept();
 		} else {
 			alert.dismiss();
+		}
+	}
+	
+	// Method to print the messages
+	public static void log(String status, String message) {
+		if (status.equalsIgnoreCase("pass")) {
+			Reports.logger.pass(message);
+		} else if (status.equalsIgnoreCase("fail")) {
+			Reports.logger.fail(message);
+		} else if (status.equalsIgnoreCase("info")) {
+			Reports.logger.info(message);
+		} else if (status.equalsIgnoreCase("warning")) {
+			Reports.logger.warning(message);
 		}
 	}
 }

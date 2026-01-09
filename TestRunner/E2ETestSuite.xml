@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-	<parameter name="BROWSER" value="Chrome"></parameter>
-	<parameter name="APP_URL" value="www.bharathtechacademy.com"></parameter>
-	<parameter name="APP_USER" value="Admin"></parameter>
-	<parameter name="APP_PWD" value="admin123"></parameter>
+	<listeners>
+		<listener
+			class-name="com.creatio.crm.framework.listeners.TestListeners" />
+	</listeners>
+
 	<test thread-count="5" name="Test">
 		<classes>
-			<class name="testng.framework.concepts.AppCommons" />			
+			<class name="com.creatio.crm.application.tests.ApplicationTest" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

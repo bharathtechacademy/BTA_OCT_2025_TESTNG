@@ -10,9 +10,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import com.creatio.crm.framework.reports.Reports;
 import com.creatio.crm.framework.utilities.PropUtil;
 
-public class BasePage {
+public class BasePage extends Reports {
 	
 	
 	// This class will have all the common methods and configurations related to browser setup to begin the execution process.
